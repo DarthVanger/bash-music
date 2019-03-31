@@ -14,21 +14,21 @@ beat () {
 }
 
 beat2 () {
-  file="$1"
-  frequency="$2"
+  file="$1"; shift;
+  frequency="$1" shift;
   repeats=$(echo "4/$frequency-1" | bc)
   for i in $(seq 0 $repeats)
   do
     random=$(shuf -i0-1000 -n1)
     pad=$(echo "$i*$frequency" | bc)
-    sox "$file" out/output-$i-$random.wav pad $pad
+    sox "$file" out/output-$i-$random.wav pad $pad $@
   done
 }
 
 rm out/*
 rm output.wav
 
-beat2 "$kick" 0.1
+beat2 "$kick" 0.25 pitch -500
 
 #sox "$kick" out/output1.wav pitch 200 pad 0 0
 #sox "$kick" out/output2.wav pitch 200 pad 1 0
