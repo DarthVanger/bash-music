@@ -9,16 +9,18 @@ beat () {
   duration=$(soxi -D "$file")
 
   result=$(echo "$position-$duration" | bc)
-  echo "pad 0 $result"
+  repeat_number=$(echo "4/$position-1" | bc)
+  echo "pad 0 $result repeat $repeat_number"
 }
 
 rm out/*
+rm output.wav
 
-sox "$kick" out/output1.wav pitch 200 $(beat "$kick" 1) repeat 3
-#sox "$perc" out/output2.wav pad 0.75 0 repeat 3
-#sox "$kick" out/output3.wav pad 0.25 0.5 pitch -300 repeat 3
-#sox "$snare" out/output4.wav pad 1 0 repeat 3
+sox "$kick" out/output1.wav pitch 200 $(beat "$kick" 0.25)
+sox "$perc" out/output2.wav $(beat "$perc" 0.5)
+sox "$kick" out/output3.wav pitch -300 $(beat "$kick" 0.75)
+sox "$snare" out/output4.wav $(beat "$snare" 1)
 
-sox out/* output.wav pad 0 4 trim 0 4
+sox -m out/* output.wav pad 0 4 trim 0 4
 
 play output.wav repeat $repeat
