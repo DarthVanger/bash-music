@@ -39,12 +39,13 @@ trap808="./hiphop/808s/Cymatics - Trap 808 2 - D.wav"
 booming808="./hiphop/808s/Cymatics - Boomin 808 1 - C.wav"
 vocal_chant="./hiphop/Vocal Chants/Cymatics - Hip-Hop Vocal Chant 1 - Crowd Breath.wav"
 vocal_chant_titan="./hiphop/Vocal Chants/Cymatics - Titan Vocal Chant - Flex.wav"
-melody_loop="./hiphop/Melody Loops/Cymatics - Hip-Hop Melody Loop 10 - 128 BPM C# Min.wav"
 dubstep="dubstep/Synths - One Shots/Cymatics - Dubstep Growl 5 - F.wav"
 synth1="./synth/synth1.wav"
 synth2="./synth/synth2.wav"
 hiphop_loop="./hiphop/Melody Loops/Cymatics - Hip-Hop Melody Loop 10 - 128 BPM C# Min.wav"
 drum_loop="./hiphop/Drums - Loops/Loops - Full/Cymatics - Hip-Hop Drum Loop 1 - 128 BPM.wav"
+dubstep_growl1="./dubstep/Synths - One Shots/Cymatics - Dubstep Growl 1 - D#.wav"
+dubstep_growl2="./dubstep/Synths - One Shots/Cymatics - Dubstep Growl 5 - F.wav"
 
 rm out/*
 rm output.wav
@@ -55,7 +56,13 @@ hiphop_loop=$(set_length "$hiphop_loop" 16)
 once "$hiphop_loop"
 once "$drum_loop"
 once "$drum_loop" pad 8
-#once "$trap808" pad 4.25
+
+#once "$banging808" pad 1.75
+#once "$trap808" pad 3.75
+#once "$dubstep" pad 0.5
+#once "$dubstep_growl1" pad 0.75
+#once "$dubstep_growl2" pad 0.75
+
 #beat "$perc" 0.5
 #beat "$kick" 0.75 pitch -400
 #beat "$snare" 1
