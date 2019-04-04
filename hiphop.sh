@@ -16,6 +16,16 @@ once () {
   sox "$file" out/output-$random.wav $@
 }
 
+set_length () {
+  file="$1"; shift;
+  desired_length="$1"; shift;
+  random=$(shuf -i0-1000 -n1)
+  original_length=$(soxi -D "$file")
+  newfile="out/output-$random.wav"
+  sox "$file" "$newfile" tempo $(echo "$original_length/$desired_length" | bc -l)
+  echo "$newfile"
+}
+
 kick="./hiphop/Drums - One Shots/Kicks/Cymatics - Grime Kick 2.wav"
 snare="./hiphop/Drums - One Shots/Snares/Cymatics - Hip-Hop Snare 1 - C.wav"
 perc="./hiphop/Drums - One Shots/Percussion/Cymatics - Low Perc 13.wav"
@@ -34,12 +44,18 @@ dubstep="dubstep/Synths - One Shots/Cymatics - Dubstep Growl 5 - F.wav"
 synth1="./synth/synth1.wav"
 synth2="./synth/synth2.wav"
 hiphop_loop="./hiphop/Melody Loops/Cymatics - Hip-Hop Melody Loop 10 - 128 BPM C# Min.wav"
+drum_loop="./hiphop/Drums - Loops/Loops - Full/Cymatics - Hip-Hop Drum Loop 1 - 128 BPM.wav"
 
 rm out/*
 rm output.wav
 
-once "$hiphop_loop" tempo $(echo "15/16" | bc -l)
-once "$kick" pad 4
+drum_loop=$(set_length "$drum_loop" 8)
+hiphop_loop=$(set_length "$hiphop_loop" 16)
+
+once "$hiphop_loop"
+once "$drum_loop"
+once "$drum_loop" pad 8
+#once "$trap808" pad 4.25
 #beat "$perc" 0.5
 #beat "$kick" 0.75 pitch -400
 #beat "$snare" 1
@@ -47,4 +63,3 @@ once "$kick" pad 4
 sox -m out/* output.wav pad 0 16 trim 0 16
 
 play output.wav repeat $repeat
-
