@@ -13,6 +13,8 @@ vocal_chant="./hiphop/Vocal Chants/Cymatics - Hip-Hop Vocal Chant 1 - Crowd Brea
 vocal_chant_titan="./hiphop/Vocal Chants/Cymatics - Titan Vocal Chant - Flex.wav"
 melody_loop="./hiphop/Melody Loops/Cymatics - Hip-Hop Melody Loop 10 - 128 BPM C# Min.wav"
 dubstep="dubstep/Synths - One Shots/Cymatics - Dubstep Growl 5 - F.wav"
+synth1="./synth/synth1.wav"
+synth2="./synth/synth2.wav"
 
 beat () {
   file="$1"; shift;
@@ -36,12 +38,13 @@ one () {
 rm out/*
 rm output.wav
 
-#one "$riser"
-beat "$kick" 0.25
-beat "$perc" 0.5
-beat "$kick" 0.75 pitch -400
-beat "$snare" 1
+one "$synth1"
+one "$synth2" pad 0.5
+#beat "$kick" 0.25
+#beat "$perc" 0.5
+#beat "$kick" 0.75 pitch -400
+#beat "$snare" 1
 
-sox -m out/* output.wav pad 0 4 trim 0 4 vol 20dB
+sox -m out/* output.wav pad 0 4 trim 0 4
 
 play output.wav repeat $repeat
