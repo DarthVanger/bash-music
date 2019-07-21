@@ -1,2 +1,0 @@
-Free sounds: https://cymatics.fm/pages/secret-free-download
-Sox piping: https://stackoverflow.com/questions/5587135/sox-merge-two-audio-files-with-a-pad
